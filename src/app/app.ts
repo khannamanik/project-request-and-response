@@ -1,12 +1,26 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
+import { Body } from "./body/body";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLinkWithHref, TranslateModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('Employee-data-Project');
+  lang:string='';
+  ngOnInit(){
+    this.lang = localStorage.getItem('lang')||'en';
+  }
+  // constructor(private translateserv:TranslateService){
+
+  // }
+  caughtchange(lang:Event){
+     let language = (lang.target as HTMLSelectElement).value ;
+     localStorage.setItem('lang',language);
+    //  this.translateserv.use(this.lang);
+    //  console.log(language);
+  }
 }

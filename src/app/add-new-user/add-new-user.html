@@ -1,0 +1,119 @@
+<div 
+  class="toast-container position-fixed top-0 end-0 p-3"
+  style="z-index: 1055;"
+>
+  
+  @if (datarecieved() && !error) {
+    <div 
+      class="toast align-items-center text-bg-success border-0 show fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          ✅ Record added successfully!
+        </div>
+        <button 
+          type="button" 
+          class="btn-close btn-close-white me-2 m-auto" 
+          (click)="datarecieved.set(false)" 
+          aria-label="Close">
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (error) {
+    <div 
+      class="toast align-items-center text-bg-danger border-0 show fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          ❌ Failed to add record: {{ error }}
+        </div>
+        <button 
+          type="button" 
+          class="btn-close btn-close-white me-2 m-auto" 
+          (click)="error=''" 
+          aria-label="Close">
+        </button>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-3">
+    <div class="card-body p-4">
+      <h3 class="text-center mb-4 text-primary fw-semibold">Employee Registration</h3>
+      <form #myform="ngForm"   (ngSubmit)="createarecord(myform)">
+        
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">First Name</label>
+            <input type="text" [(ngModel)]="employeelist.firstname" #firstname="ngModel" class="form-control" placeholder="Enter first name" name='firstname' required minlength="3">
+            @if (firstname.touched  && firstname.invalid) {
+            <div class="text-danger">First name is required.  must contain at least 3 character</div>
+            }
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Last Name</label>
+            <input type="text" [(ngModel)]="employeelist.lastname" #lastname="ngModel" class="form-control" placeholder="Enter last name" name='lastname' required minlength="3">
+           @if (lastname.touched && lastname.invalid) {
+            <div class="text-danger">Last name is required. must contain at least 3 character </div>
+           }
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" #email="ngModel" [(ngModel)]="employeelist.email" placeholder="Enter email" name='email' required email>
+            @if (email.touched && email.invalid) {
+            <div class="text-danger">Please enter a valid email.</div>
+            }
+          </div>
+
+         <div class="col-md-3">
+  <label class="form-label">Date of Birth</label>
+  <input  
+  name='dob'
+  #dob="ngModel"
+  [(ngModel)]="employeelist.dob"
+    type="date" 
+    class="form-control" 
+    min="1965-01-01" 
+    max="2007-12-31" 
+    placeholder="D.O.B" 
+    required
+  >
+  @if (dob.touched && dob.invalid) {
+            <div class="text-danger">Year must be between 1965 and 2007.</div>
+            }
+  
+</div>
+
+
+          <div class="col-md-3">
+            <label class="form-label">Contact Number</label>
+            <input type="tel" class="form-control" placeholder="10-digit number" #contact="ngModel" [(ngModel)]="employeelist.contact" pattern="^[0-9]{10}$" minlength="10" maxlength="10" name='contact' required>
+            @if (contact.touched && contact.invalid) {
+           <div class="text-danger">Contact must be 10 digits.</div>
+            }
+            
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button class="btn btn-primary px-4" type="submit" [disabled]="myform.invalid">Submit</button>
+          <button class="btn btn-outline-secondary px-4 ms-2" type="reset" onclick="reset()">Reset</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+

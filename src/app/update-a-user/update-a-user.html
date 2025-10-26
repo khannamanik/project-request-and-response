@@ -1,0 +1,139 @@
+<div class="container mt-4">
+    <div 
+  class="toast-container position-fixed top-0 end-0 p-3"
+  style="z-index: 1055;"
+>
+  
+  @if (update()) {
+    <div 
+      class="toast align-items-center text-bg-success border-0 show fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          ✅ Record added successfully!
+        </div>
+        <button 
+          type="button" 
+          class="btn-close btn-close-white me-2 m-auto"  
+          aria-label="Close">
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (error) {
+    <div 
+      class="toast align-items-center text-bg-danger border-0 show fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          ❌ Failed to add record: {{ error }}
+        </div>
+      <button 
+          type="button" 
+          class="btn-close btn-close-white me-2 m-auto" 
+          (click)="error=''" 
+          aria-label="Close">
+        </button>
+      </div>
+    </div>
+  }
+</div>
+  <h4 class="text-center mb-3">Update a User Detail</h4>
+
+  <form (ngSubmit)="updateUser()" #form="ngForm" class="border rounded p-3">
+    <div class="mb-3">
+      <label for="firstname" class="form-label">First Name</label>
+      <input
+        type="text"
+        id="firstname"
+        name="firstname"
+        #firstname = 'ngModel'
+        class="form-control"
+        [(ngModel)]="user.firstname"
+        required
+        minlength="3"
+      />
+       @if (firstname.touched  && firstname.invalid) {
+            <div class="text-danger">First name is required.  must contain at least 3 character</div>
+            }
+    </div>
+
+    <div class="mb-3">
+      <label for="lastname" class="form-label">Last Name</label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        class="form-control"
+        #lastname = 'ngModel'
+        [(ngModel)]="user.lastname"
+        minlength="3"
+        required
+      />
+       @if (lastname.touched && lastname.invalid) {
+            <div class="text-danger">Last name is required. must contain at least 3 character </div>
+           }
+    </div>
+
+    <div class="mb-3">
+      <label for="contact" class="form-label">Contact</label>
+      <input
+        type="text"
+        id="contact"
+        name="contact"
+        class="form-control"
+        #contact = 'ngModel'
+        [(ngModel)]="user.contact"
+        minlength="10"
+        maxlength="10"
+        required
+      />
+       @if (contact.touched && contact.invalid) {
+           <div class="text-danger">Contact must be 10 digits.</div>
+            }
+    </div>
+
+    <div class="mb-3">
+      <label for="dob" class="form-label">Date of Birth</label>
+      <input
+        type="date"
+        id="dob"
+        name="dob"
+        class="form-control"
+        #dob = 'ngModel'
+        [(ngModel)]="user.dob"
+        required
+      />
+      @if (dob.touched && dob.invalid) {
+            <div class="text-danger">Year must be between 1965 and 2007.</div>
+            }
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        #email = 'ngModel'
+        [(ngModel)]="user.email"
+        required
+        email
+      />
+       @if (email.touched && email.invalid) {
+            <div class="text-danger">Please enter a valid email.</div>
+            }
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Make Changes</button>
+  </form>
+</div>
+
