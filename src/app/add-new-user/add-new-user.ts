@@ -24,7 +24,8 @@ export class AddNewUser {
   destroyref = inject(DestroyRef)
 
   createarecord(formValue: any) {
-   let subscription = this.service.senddata(formValue.value).subscribe({
+     let emp = {...this.employeelist,date:new Date().toISOString()};
+   let subscription = this.service.senddata(emp).subscribe({
       next: () => {
         this.datarecieved.set(true);
         formValue.reset();
