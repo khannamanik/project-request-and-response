@@ -48,34 +48,44 @@
 
   
   @if (list && list.length > 0) {
-    <table class="table table-bordered table-hover shadow-sm rounded">
-      <thead class="table-dark">
+    <div class="table-responsive">
+  <table class="table table-bordered table-hover shadow-sm rounded">
+    <thead class="table-dark">
+      <tr>
+        <th>Id</th>
+        <th class="d-none d-md-table-cell">Date</th>
+        <th>Full Name</th>
+        <th class="d-none d-lg-table-cell">Email</th>
+        <th class="text-center">Age</th>
+        <th class="d-none d-md-table-cell">Contact</th>
+        <th class="text-center">Remove</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for(tab of list; track tab) {
         <tr>
-          <th>Id</th>
-          <th>Date</th>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th style="text-align: center;">Age</th>
-          <th>Contact Number</th>
-          <th style="text-align: center;">Remove user</th>
-          <th>Edit</th>
+          <td class="fw-medium">{{ tab.id }}</td>
+          <td class="d-none d-md-table-cell">
+            {{ tab.date | date:'mediumDate' }}
+          </td>
+          <td>{{ tab.firstname }} {{ tab.lastname }}</td>
+          <td class="d-none d-lg-table-cell">{{ tab.email }}</td>
+          <td class="text-center">{{ tab.dob | dobage }}</td>
+          <td class="d-none d-md-table-cell">{{ tab.contact }}</td>
+          <td class="text-center" (click)="deleteuser(tab.id)">
+            <i class="fa-solid fa-user-minus fs-5 text-danger"></i>
+          </td>
+          <td (click)="updateUser(tab.id)">
+            <i class="fa-solid fa-user-pen fs-5 text-primary"></i>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        @for(tab of list; track tab) {
-          <tr class="bg-light border rounded-3 mb-3 shadow-sm">
-            <td class="fw-medium">{{  tab.id }}</td>
-            <td>{{ tab.date | date:'mediumDate' }}</td>
-            <td>{{ tab.firstname + ' ' + tab.lastname }}</td>
-            <td>{{ tab.email }}</td>
-            <td>{{ tab.dob | dobage}}</td>
-            <td>{{ tab.contact }}</td>
-            <td style="text-align: center;" (click)="deleteuser(tab.id)" ><i class="fa-solid fa-user-minus"></i></td>
-            <td  (click)="updateUser(tab.id)"><i class="fa-solid fa-user-pen"></i></td>
-          </tr>
-        }
-      </tbody>
-    </table>
+      }
+    </tbody>
+  </table>
+</div>
+
   }
 
   
