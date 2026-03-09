@@ -1,0 +1,100 @@
+<div class="container my-4">
+  @if (confirm()) {
+    <div 
+      class="toast align-items-center text-bg-success border-0 show fade"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          ✅ Record updated successfully!
+        </div>
+        <button 
+          type="button" 
+          class="btn-close btn-close-white me-2 m-auto" 
+          aria-label="Close">
+        </button>
+      </div>
+    </div>
+  }
+  
+   @if(list && list.length > 0){
+     <h3 class="text-center mb-4 text-primary fw-semibold">Employee Records</h3>
+  <div class="mb-3 text-center">
+    <label for="filter" class="form-label fw-semibold me-2">Filter By:</label>
+    <select id="filter" class="form-select d-inline-block w-auto"
+      name="filter" [(ngModel)]="values" (ngModelChange)="onfilterchange()">
+      <option value="">--Select--</option>
+      <option value="date">Sort by Date(Latest Added)</option>
+      <option value="age">Sort by Age(Senior)</option>
+    </select>
+  </div>
+}
+
+ 
+  @if (isfetching() && !error()) {
+    <div class="alert alert-info text-center" role="alert">
+      Please wait... fetching employee data ⏳
+    </div>
+  }
+
+ 
+  @if (error()) {
+    <div class="alert alert-danger text-center" role="alert">
+      Unable to fetch data Error Found: <br>       {{ error() }}
+    </div>
+  }
+
+  
+  @if (list && list.length > 0) {
+    <div class="table-responsive">
+  <table class="table table-bordered table-hover shadow-sm rounded">
+    <thead class="table-dark">
+      <tr>
+        <th>Id</th>
+        <th class="d-none d-md-table-cell">Date</th>
+        <th>Full Name</th>
+        <th class="d-none d-lg-table-cell">Email</th>
+        <th class="text-center">Age</th>
+        <th class="d-none d-md-table-cell">Contact</th>
+        <th class="text-center">Remove</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for(tab of list; track tab) {
+        <tr>
+          <td class="fw-medium">{{ tab.id }}</td>
+          <td class="d-none d-md-table-cell">
+            {{ tab.date | date:'mediumDate' }}
+          </td>
+          <td>{{ tab.firstname }} {{ tab.lastname }}</td>
+          <td class="d-none d-lg-table-cell">{{ tab.email }}</td>
+          <td class="text-center">{{ tab.dob | dobage }}</td>
+          <td class="d-none d-md-table-cell">{{ tab.contact }}</td>
+          <td class="text-center" (click)="deleteuser(tab.id)">
+            <i class="fa-solid fa-user-minus fs-5 text-danger"></i>
+          </td>
+          <td (click)="updateUser(tab.id)">
+            <i class="fa-solid fa-user-pen fs-5 text-primary"></i>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+  }
+
+  
+  @else {
+    <div class="text-center mt-5">
+      <p class="text-muted fs-5">No data stored yet! Want to store new records?</p>
+      <a routerLink="/AddUser" class="btn btn-outline-primary btn-lg">
+        Add Data Here 👇
+      </a>
+    </div>
+  }
+</div>

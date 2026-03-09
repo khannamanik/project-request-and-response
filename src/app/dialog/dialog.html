@@ -1,0 +1,18 @@
+<div *ngIf="data.str === 'delete' ">
+        <p mat-dialog-title class="ps-4 pt-2 fs-5" ><i>Remove the user with id {{data.ids}}?</i></p>
+       
+        <mat-dialog-actions>
+          <button  matButton="elevated" class="text-primary"  mat-dialog-close>Cancel</button>
+          <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+          <button  matButton="elevated" [mat-dialog-close]="true">delete</button>
+        </mat-dialog-actions>
+    </div>
+<div *ngIf="data.str === 'edit' ">
+        <p mat-dialog-title class="ps-4 pt-2 fs-5" ><i>Edit the user with id {{data.ids}}?</i></p>
+       
+        <mat-dialog-actions>
+          <button  matButton="elevated" class="text-primary"  mat-dialog-close>Cancel</button>
+          <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+          <button  matButton="elevated" class="text-primary" [mat-dialog-close]="true">edit</button>
+        </mat-dialog-actions>
+    </div>
