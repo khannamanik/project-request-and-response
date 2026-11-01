@@ -1,4 +1,0 @@
-- Follow the DRY principle and reuse existing code wherever possible.
-- Check the existing codebase for the requirement's root cause before implementing changes.
-- Keep implementation simple and maintainable; avoid unnecessary variables or service injections.
-- Ensure changes do not affect existing functionality.

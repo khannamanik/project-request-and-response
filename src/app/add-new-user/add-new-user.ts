@@ -5,9 +5,9 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-new-user',
+  imports: [FormsModule],
   templateUrl: './add-new-user.html',
-  styleUrl: './add-new-user.css',
-  standalone:false,
+  styleUrl: './add-new-user.css'
 })
 export class AddNewUser {
   error = '';

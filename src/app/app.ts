@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
+import { Body } from "./body/body";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  standalone:false,
+  imports: [RouterOutlet, RouterLinkWithHref, TranslateModule],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrl: './app.css'
 })
 export class App {
   lang:string='';

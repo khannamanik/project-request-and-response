@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { data } from './employee.modal';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +8,8 @@ import { data } from './employee.modal';
 export class Employee {
   private httpClient = inject(HttpClient);
   list = signal<any[]>([]);
-   userlist(): Observable<data[]> {
-  return this.httpClient.get<data[]>('https://68f7f9c5f7fb897c6617970f.mockapi.io/api/v1/Users')
+   userlist(): Observable<any[]> {
+  return this.httpClient.get<any[]>('https://68f7f9c5f7fb897c6617970f.mockapi.io/api/v1/Users')
 }
    senddata(body: any):Observable<any[]> {
     let httpheaders = new HttpHeaders()

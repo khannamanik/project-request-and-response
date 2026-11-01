@@ -15,7 +15,6 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Too
 
 @Component({
   selector: 'app-statistics',
-  standalone:false,
   templateUrl: './statistics.html',
   styleUrl: './statistics.css',
 })
