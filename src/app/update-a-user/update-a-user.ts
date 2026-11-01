@@ -5,7 +5,7 @@ import { Employee } from '../employee';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-update-a-user',
-  imports: [FormsModule],
+  standalone:false,
   templateUrl: './update-a-user.html',
   styleUrl: './update-a-user.css'
 })

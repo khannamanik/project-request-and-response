@@ -3,7 +3,7 @@ import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-body',
-  imports: [ RouterLinkWithHref],
+  standalone:false,
   templateUrl: './body.html',
   styleUrl: './body.css'
 })
